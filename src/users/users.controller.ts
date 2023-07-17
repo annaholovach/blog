@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, UseGuards, UsePipes} from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards, UsePipes, Delete} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -40,6 +40,15 @@ export class UsersController {
     @Post('/role')
     addRole(@Body() dto: AddRoleDto) {
         return this.usersService.addRole(dto)
+    }
+
+    @ApiOperation({summary: 'выдать роль'})
+    @ApiResponse({status: 200})
+    @Roles('ADMIN')
+    @UseGuards(RolesGuard)
+    @Delete('/role')
+    removeRole(@Body() dto: AddRoleDto) {
+        return this.usersService.removeRole(dto)
     }
 
     @ApiOperation({summary: 'забанить пользователя'})
