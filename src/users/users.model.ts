@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Model, Table, Column, DataType, BelongsToMany, HasMany } from "sequelize-typescript";
-import { Post } from "src/posts/posts.model";
+import { Posts } from "src/posts/posts.model";
 import { Role } from "src/roles/roles.model";
 import { UserRoles } from "src/roles/user-roles.model";
 
@@ -12,7 +12,7 @@ interface UserCreationAttrs {
 
 @Table({tableName: 'users'})
 export class User extends Model<User, UserCreationAttrs> {
-    @ApiProperty({example: '1', description: 'уникальный идентификатор'})
+    @ApiProperty({example: '1', description: 'унікальний ідентифікатор'})
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number;
 
@@ -24,17 +24,17 @@ export class User extends Model<User, UserCreationAttrs> {
     @Column({type: DataType.STRING, allowNull: false})
     password: string;
 
-    @ApiProperty({example: 'true', description: 'забанен или нет'})
+    @ApiProperty({example: 'true', description: 'забанений чи ні'})
     @Column({type: DataType.BOOLEAN, defaultValue: false})
     banned: boolean;
 
-    @ApiProperty({example: 'забанили за плохое поведение', description: 'причина блокировки'})
+    @ApiProperty({example: 'забанили за погану поведінку', description: 'причина блокування'})
     @Column({type: DataType.STRING, allowNull: true})
     banReason: string;
 
     @BelongsToMany(() => Role, () => UserRoles)
     roles: Role[]
 
-    @HasMany(() => Post)
-    posts: Post[]
+    @HasMany(() => Posts)
+    posts: Posts[]
 }

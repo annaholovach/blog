@@ -19,7 +19,7 @@ services:
     restart: always
   postgres:
     container_name: postgres
-    image: postgres:12
+    image: postgres:11
     env_file:
       - .development.env
     environment:
@@ -27,7 +27,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - pgdata:var/lib/postgres/data
     restart: always
 
 volumes:

@@ -16,7 +16,7 @@ export class UsersController {
 
     constructor(private usersService: UsersService) {}
 
-    @ApiOperation({summary: 'создание пользователя'})
+    @ApiOperation({summary: 'створити користувача'})
     @ApiResponse({status: 200, type: User})
     // @UsePipes(ValidationPipe)
     @Post()
@@ -24,7 +24,7 @@ export class UsersController {
         return this.usersService.createUser(userDto)
     }
 
-    @ApiOperation({summary: 'получение пользователей'})
+    @ApiOperation({summary: 'отримати всіх користувачів'})
     @ApiResponse({status: 200, type: [User]})
     @Roles('ADMIN')
     @UseGuards(RolesGuard)
@@ -33,7 +33,7 @@ export class UsersController {
         return this.usersService.getAllUsers()
     }
 
-    @ApiOperation({summary: 'выдать роль'})
+    @ApiOperation({summary: 'видати роль'})
     @ApiResponse({status: 200})
     @Roles('ADMIN')
     @UseGuards(RolesGuard)
@@ -42,7 +42,7 @@ export class UsersController {
         return this.usersService.addRole(dto)
     }
 
-    @ApiOperation({summary: 'выдать роль'})
+    @ApiOperation({summary: 'видалити роль'})
     @ApiResponse({status: 200})
     @Roles('ADMIN')
     @UseGuards(RolesGuard)
@@ -51,7 +51,7 @@ export class UsersController {
         return this.usersService.removeRole(dto)
     }
 
-    @ApiOperation({summary: 'забанить пользователя'})
+    @ApiOperation({summary: 'забанити користувача'})
     @ApiResponse({status: 200})
     @Roles('ADMIN')
     @UseGuards(RolesGuard)

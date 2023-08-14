@@ -1,14 +1,14 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { InjectModel } from '@nestjs/sequelize';
-import { Post } from './posts.model';
+import { Posts } from './posts.model';
 import { FilesService } from '../files/files.service';
 import { UpdatePostDto } from './dto/update-post.dto';
 
 @Injectable()
 export class PostsService {
 
-    constructor(@InjectModel(Post) private postRepository: typeof Post,
+    constructor(@InjectModel(Posts) private postRepository: typeof Posts,
                                    private fileService: FilesService) {}
     
     async create(dto: CreatePostDto, image: any) {
